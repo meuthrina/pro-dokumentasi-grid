@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Tag Terapan Umum */
+body {
+  background-color: #f7f7f9;
+}
+h2 {
+  padding-bottom: 1rem;
+}
+p,
+li {
+  margin-bottom: 0.8rem;
+  color: #434346;
+  font-size: 1em;
+}
+pre {
+  overflow-x: auto;
+  flex-direction: column;
+  display: flex;
+  margin-bottom: 1.35rem;
+}
+pre.vs {
+  background-color: #fdfd96;
+  border-radius: 0.3rem;
+}
+code {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bolder;
+  width: fit-content;
+  display: block;
+  background-color: #fdfd96;
+  padding: 0.5rem;
+  line-height: 0.8em;
+  border-radius: 0.3rem;
+}
+ul,
+ol {
+  margin-left: 1.5rem;
+}
+li a {
+  text-decoration: none;
+  color: salmon;
+}
+
+/* Kelas Terapan Umum */
+section.section {
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  margin: 0.3rem auto;
+}
+.ex-header {
+  margin: 4rem auto;
+}
+.ex {
+  max-width: 43.75rem;
+  margin-bottom: 3rem;
+}
+.ex-section,
+.ex-aside {
+  width: 100%;
+}
+.vp {
+  width: 100%;
+  background-color: white;
+  min-height: 18rem;
+  border: 0.5rem solid #f7f7f9;
+  border-radius: 0.3rem;
+}
+.vp-example {
+  display: grid;
+  gap: 0.1rem;
+}
+.vp-item {
+  display: flex;
+  background-color: salmon;
+  color: white;
+  border-radius: 0.1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive Breakpoint */
+@media screen and (min-width: 576px) {
+  .ex {
+    display: flex;
+    max-width: 85%;
+    margin: 3rem auto;
+    justify-content: space-between;
+  }
+  .ex-section {
+    max-width: 50%;
+  }
+  .ex-aside {
+    max-width: 45%;
+  }
+  .ex-header {
+    width: 50%;
+  }
+}
+
+/* Example Grid */
+.gtr {
+  grid-template-rows: 50px 100px;
+}
+.gtc {
+  grid-template-columns: 90px 50px 120px;
+  overflow: auto;
+}
+.gtri {
+  grid-template-rows: 100px auto 100px;
+}
+.gtci {
+  grid-template-columns: 200px 25% 50px;
+  overflow: auto;
+}
+.gac {
+  grid-template-rows: 30px 60px 90px;
+  grid-auto-rows: 40px;
+}
+.garc {
+  grid-template-rows: 50px 30px;
+  grid-template-columns: 100px 50px;
+  grid-auto-rows: 100px;
+}
+.gaf {
+  grid-template-columns: 100px 50px;
+  grid-auto-flow: column;
+  grid-auto-columns: 100px;
+  overflow: auto;
+}
+.gafi {
+  grid-template-rows: 50px 30px;
+  grid-template-columns: 100px 50px;
+  grid-auto-flow: column;
+}
+.rpta {
+  grid-template-columns: repeat(4, 1fr) repeat(5, 2fr);
+}
+.rptb {
+  grid-template-rows: repeat(4, 100px);
+  grid-template-columns: repeat(3, 1fr);
+}
+.rptc {
+  grid-template-columns: 30px repeat(3, 1fr) 30px;
+}
+.afit {
+  grid-template-columns: repeat(auto-fit, 50px);
+}
+.minmax {
+  grid-template-rows: minmax(100px, auto);
+  grid-template-columns: minmax(auto, 50%) 1fr 3em;
+}
+.mm4 {
+  padding: 1rem;
+}
+.gapr {
+  row-gap: 20px;
+  column-gap: 5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+.gap {
+  gap: 5px;
+  grid-template-columns: 1fr 1fr;
+}
+.p5 {
+  grid-area: content;
+  padding: 1rem;
+}
+.ji {
+  grid-template-rows: 150px 150px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "content content"
+    "content content";
+}
+.jis {
+  justify-items: start;
+}
+.jic {
+  justify-items: center;
+}
+.jie {
+  justify-items: end;
+}
+.jist {
+  justify-items: stretch;
+}
+.als {
+  align-items: start;
+}
+.alc {
+  align-items: center;
+}
+.alend {
+  align-items: end;
+}
+.ale {
+  align-items: stretch;
+}
+.pics {
+  place-items: center end;
+}
+.pc {
+  width: 100%;
+  height: 300px;
+  grid-template-rows: repeat(4, 45px);
+  grid-template-columns: repeat(4, 45px);
+  gap: 0.5em;
+}
+.acc {
+  align-content: center;
+}
+.ace {
+  align-content: end;
+}
+.acsa {
+  align-content: space-around;
+}
+.acsb {
+  align-content: space-between;
+}
+.acse {
+  align-content: space-evenly;
+}
+.jcs {
+  justify-content: start;
+}
+.jcc {
+  justify-content: center;
+}
+.jce {
+  justify-content: end;
+}
+.jcsa {
+  justify-content: space-around;
+}
+.jcsb {
+  justify-content: space-between;
+}
+.jcse {
+  justify-content: space-evenly;
+}
+.pci {
+  place-content: end center;
+}
+.gipi {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+.gipi .vp-item,
+.gipii .vp-item {
+  padding: 1rem;
+}
+.gipi-item {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background-color: lightseagreen;
+}
+.gipii {
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
+.gipii-item {
+  grid-row: 2;
+  grid-column: 3 / 4;
+  background-color: lightseagreen;
+}
+.sp {
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
+.sp .vp-item {
+  padding: 1rem;
+}
+.sp-satu {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  background-color: lightseagreen;
+}
+.sp-dua {
+  grid-row-start: span 3;
+  background-color: lightseagreen;
+}
+.sp-tiga {
+  grid-row: 2 / 5;
+  grid-column: 2 / 4;
+  background-color: lightseagreen;
+}
+.sp-empat {
+  grid-row: 2 / span 3;
+  grid-column: span 2;
+  background-color: lightseagreen;
+}
+.as-satu {
+  align-self: start;
+}
+.as-dua {
+  align-self: center;
+}
+.as-tiga {
+  align-self: end;
+}
+.js-satu {
+  justify-self: start;
+}
+.js-dua {
+  justify-self: center;
+}
+.js-tiga {
+  justify-self: end;
+}
+.ps-satu {
+  align-self: center;
+  justify-self: center;
+}

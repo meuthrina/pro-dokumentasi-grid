@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn GRID</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="artikel">
+        <section id="table-of-content" class="section">
+          <div class="ex-header">
+            <h2>Table of Content</h2>
+            <ol>
+              <li><a href="#rows-and-column">Rows & Column</a></li>
+              <li><a href="#grid-auto">grid-auto</a></li>
+              <li><a href="#repeat()">repeat()</a></li>
+              <!-- <li><a href="#min-content-and-max-content">min-content & max-content</a></li> -->
+              <li><a href="#auto-fill-and-auto-fit">auto-fill & auto-fit</a></li>
+              <li><a href="#minmax()">minmax()</a></li>
+              <li><a href="#row-gap-and-column-gap">row-gap & column-gap</a></li>
+              <li><a href="#place-items">place-items</a></li>
+              <li><a href="#place-content">place-content</a></li>
+              <li><a href="#self-properties">place-self</a></li>
+              <li><a href="#grid-item-properties">Grid Item Porperties</a></li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <section id="rows-and-column" class="section">
+        <header class="ex-header">
+          <h2>Rows & Column</h2>
+          <p>
+            Mendefinisikan kolom / baris dengan cara menuliskan nilai dipisahkan
+            oleh spasi. nilai merepresentasikan ukuran grid track dan spasi
+            merepresentasikan grid line.
+          </p>
+          <pre class="vs">
+            <code>.container {</code>
+            <code>   display: grid;</code>
+            <code>   grid-template-columns: [track-size] ... | [line-name] [track-size] ... ;</code>
+            <code>   grid-template-rows: [track-size] ... | [line-name] [track-size] ... ;</code>
+            <code>}</code>
+          </pre>
+          <ul>
+            <li><p>[track-size] = bisa berupa px | % | auto | fr (fraction).</p></li>
+            <li><p>[line-name] = nama bebas untuk track.</p></li>
+            <li><p>Explicit = ukuran (fix) yang telah kita tentukan nilainya.</p></li>
+            <li><p>Implicit = ukuran yang secara otomatis ditentukan oleh grid (auto).</p></li>
+          </ul>
+        </header>
+        <div class="ex">
+          <div class="ex-section">
+            <pre>
+                <code>grid-template-rows: 50px 100px</code>
+            </pre>
+            <p>Baris pertama kita atur ukuran fix nya yaitu 50px</p>
+            <p>Baris kedua kita atur ukuran fix nya yaitu 100px</p>
+            <p>
+              Baris lain yang tidak kita atur ukuran fix nya (implicit), ukuran
+              nya akan menyesuaikan isi dari konten/items nya.
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gtr">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">
+            <pre>
+                <code>grid-template-column: 90px 50px 120px</code>
+            </pre>
+            <p>Kolom pertama kita atur ukuran fix nya yaitu 90px</p>
+            <p>Kolom kedua kita atur ukuran fix nya yaitu 50px</p>
+            <p>Kolom ketiga kita atur ukuran fix nya yaitu 120px</p>
+            <p>
+              Item 4, 5, 6 akan membuat baris baru karena hanya 3 kolom yang
+              ditentukan nilai fix nya. Berbeda dengan baris, ukuran item pada
+              properti column, akan menyesuaikan dengan ukuran content nya.
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gtc">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">
+            <pre>
+                <code>grid-template-rows: 100px auto 100px</code>
+            </pre>
+            <p>Nilai pada properti ini juga bisa ditentukan dengan units selain px.</p>
+            <p>Karena kita mengatur nilai pada baris kedua auto, maka ukuran nya menyesuaikan dengan isi content nya. Sama hal nya dengan item 4, 5 dan 6.</p>
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gtri">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">
+            <pre>
+                <code>grid-template-columns: 200px 25% 50px</code>
+            </pre>
+            <p>Nilai pada properti ini juga bisa ditentukan dengan nilai selain px.</p>
+            <p>Jika kita menggunakan nilai yang berbeda units, Maka seluruh nilai nya akan di akumulasikan terlebih dahulu dengan mengutamakan nilai fix nya terlebih dahulu.</p>
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gtci">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="grid-auto" class="section">
+        <header class="ex-header">
+          <h2>grid-auto-rows & grid-auto-columns</h2>
+          <p>Mengatur ukuran grid track yang tidak dituliskan pada
+            grid-template (implicit track).
+          </p>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-rows: 30px 60px 90px</code>
+                <code>grid-auto-rows: 40px</code>
+            </pre>
+            <p>Disini diketahui bahwa items yang diberi nilai fix adalah baris 1, 2, dan 3.</p>
+            <p>Karena baris 4, 5, dan 6 tidak kita tentukan nilai fix nya, maka nilai default nya ditentukan oleh grid (auto). Jika kita ingin mengubah ukuran auto tersebut maka kita menggunakan properti grid-auto-rows</p>
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gac">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">
+            <pre class="vs">
+                <code>grid-template-rows: 50px 30px;</code>
+                <code>grid-template-columns: 100px 50px;</code>
+                <code>grid-auto-rows: 100px;</code>
+            </pre>
+            <p>Disini diketahui bahwa items yang diberi nilai fix adalah item 1, 2, 3 dan 4.</p>
+            <p>Karena kita tahu jika kita menentukan jumlah sebuah kolom, maka kolom yang tidak kita tentukan nilainya akan membuat baris baru.</p>
+            <p>Pada kasus ini, item 5 dan 6 membuat baris baru karena kita hanya menentukan hanya 2 kolom yang diberi nilai fix.</p>
+            <p>Item 5 dan 6 tidak ditentukan nilai nya oleh grid-template-rows. maka jika kita ingin mengatur nilai sebuah item yang tidak kita tentukan nilai nya (implicit). maka kita memerlukan properti grid-auto-rows / grid-auto-column</p>
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example garc">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <header class="ex-header">
+          <h2>grid-auto-flow</h2>
+          <p>Mengatur penempatan item/cell pada grid track, termasuk
+            yang ditulis secara implicit. (mirip dengan flex-direction)
+          </p>
+          <pre class="vs">
+            <code>.container {</code>
+            <code>   grid-auto-flow: row | column | row dense | column dense;</code>
+            <code>}</code>
+          </pre>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-columns: 100px 50px</code>
+                <code>grid-auto-flow: column</code>
+                <code>grid-auto-columns: 100px</code>
+            </pre>
+            <p>Disini diketahui bahwa items yang diberi nilai fix adalah kolom 1 dan 2</p>
+            <p>Karena kolom 3, 4, 5, dan 6 tidak kita tentukan nilai fix nya, maka secara default kolom tersebut akan membuat baris baru.</p>
+            <p>Jika kita ingin mengatur supaya kolom yang tidak kita tentukan nilai fix nya tidak membuat baris baru, maka kita memerlukan properti grid-auto-flow</p>
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gaf">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-rows: 50px 30px</code>
+                <code>grid-template-columns: 100px 50px</code>
+                <code>grid-auto-flow: column</code>
+            </pre>
+            <p>Disini diketahui bahwa items yang diberi nilai fix adalah item 1, 2, 3, dan 4</p>
+            <p>Karena item 5 dan 6 tidak kita tentukan nilai fix nya, maka seharusnya item tersebut akan membuat baris baru.</p>
+            <p>Karena kita menggunakan properti grid-auto-flow: column; , maka item 5 dan 6 mengubah arah direksinya yang seharusnya kebawah (membuat baris baru) menjadi ke arah kanan.</p>
+            </p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gafi">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="repeat()" class="section">
+        <header class="ex-header">
+          <h2>repeat()</h2>
+          <p>Menentukan grid track secara berulang.
+          </p>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-columns: repeat(4, 1fr) repeat(5, 2fr)</code>
+            </pre>
+            <p>Disini value pertama mendefinisikan untuk membuat 4 kolom dengan ukuran masing-masing 1 fraction.</p>
+            <p>Dan value selanjutnya menentukan kolom selanjutnya yaitu 5 kolom dengan ukuran masing-masing 2 fraction.</p>
+            <p>Walaupun jumlah items tidak sesuai dengan value kolom yang kita buat, yakni seharusnya 9 item. Tetapi, tetap ada ruang kosong yang dibuat untuk diisi item ke 9/selanjutnya.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example rpta">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-rows: repeat(4, 100px)</code>
+                <code>grid-template-columns: repeat(3, 1fr)</code>
+            </pre>
+            <p>Value pada grid-template-rows mendefinisikan untuk membuat 4 baris dengan ukuran masing-masing 100px.</p>
+            <p>Value pada grid-template-columns mendefinisikan untuk membuat 3 kolom dengan ukuran masing-masing 1 fraction.</p>
+            <p>Walaupun jumlah items tidak sesuai dengan value kolom yang kita buat, tetap ada ruang kosong yang sudah didefinisikan dan dibuat untuk diisi item selanjutnya.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example rptb">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-columns: 30px repeat(3, 1fr) 30px</code>
+            </pre>
+            <p>Value diatas mendefiniskan 1 kolom = 30px</p>
+            <p>3 kolom = 1fr</p>
+            <p>Dan 1 kolom = 30px.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example rptc">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section id="min-content-and-max-content" class="section">
+        <header class="ex-header">
+          <h2>min-content & max-content</h2>
+          <p>menentukan seberapa besar ukuran grid track 
+            berdasarkan content pada sebuah item.
+          </p>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-columns: repeat(4, 1fr) repeat(5, 2fr)</code>
+            </pre>
+            <p>Disini value pertama mendefinisikan untuk membuat 4 kolom dengan ukuran masing-masing 1 fraction.</p>
+            <p>Dan value selanjutnya menentukan kolom selanjutnya yaitu 5 kolom dengan ukuran masing-masing 2 fraction.</p>
+            <p>Walaupun jumlah items tidak sesuai dengan value kolom yang kita buat, yakni seharusnya 9 item. Tetapi, tetap ada ruang kosong yang dibuat untuk diisi item ke 9/selanjutnya.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example rpta">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+
+      <section id="auto-fill-and-auto-fit" class="section">
+        <header class="ex-header">
+          <h2>auto-fill & auto-fit</h2>
+          <p>Menentukan jumlah item untuk berada pada grid track.
+          </p>
+          <ul>
+            <li><p>auto-fit = menentukan akhir grid pada track terakhir.</p></li>
+            <li><p>auto-fill = menentukan akhir grid di tempat yang bisa diisi track lagi.</p></li>
+          </ul>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-columns: repeat(auto-fit, 100px)</code>
+            </pre>
+            <p>Disini value nya mendefinisikan untuk membuat kolom berukuran 100px yang jumlah kolomnya sebanyak besar ukuran (lebar) container nya.</p>
+            <p>Item yang tidak muat ketika viewport diperkecil akan berpindah ke bawah (membuat baris baru).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example afit">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="minmax()" class="section">
+        <header class="ex-header">
+          <h2>minmax()</h2>
+          <p>Menentukan ukuran minimal & maksimal dari grid track.
+          </p>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-template-rows: minmax(100px, auto)</code>
+                <code>grid-template-columns: minmax(auto, 50%) 1fr 3em</code>
+            </pre>
+            <p>Fungsi minmax() menerima 2 argumen: yang pertama adalah ukuran minimum track dan yang kedua ukuran maksimum. Di samping value explicit, value nya juga bisa auto, yang memungkinkan track tumbuh / meregang berdasarkan ukuran konten.</p>
+            <p>Dalam contoh ini, track baris pertama diatur untuk memiliki tinggi minimum 100px, tetapi ukuran maksimum otomatis, dimana akan memungkinkan track baris untuk mengembangkannya konten lebih tinggi dari 100px.</p>
+            <p>Track kolom pertama memiliki ukuran minimum otomatis, tetapi ukuran maksimumnya 50%, dimana akan mencegahnya mendapatkan tidak lebih lebar dari 50% dari lebar kontainer grid.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example minmax">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item mm4">4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum modi iusto velit veniam, doloremque delectus dolor? Deleniti reprehenderit blanditiis inventore! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut rerum quas aspernatur aperiam doloribus vitae id distinctio asperiores libero quos.</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="row-gap-and-column-gap" class="section">
+        <header class="ex-header">
+          <h2>row-gap and column-gap</h2>
+          <p>mendefinisikan ukuran grid line / jarak antar baris atau kolom.
+          </p>
+          <pre class="vs">
+            <code>.container {</code>
+            <code>   row-gap: [line-size];</code>
+            <code>   column-gap: [line-size];</code>
+            <code>   gap: [row-gap] [column-gap]</code>
+            <code>}</code>
+          </pre>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>row-gap: 20px</code>
+                <code>column-gap: 5rem</code>
+            </pre>
+            <p>Gap adalah properti untuk memberi jarak / ruang antar items baik secara horizontal maupun vertikal.</p>
+            <p>Value pada properti gap bisa menggunakan px, %, em, dsb.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gapr">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>gap: 5px</code>
+            </pre>
+            <p>Properti gap adalah shorthand untuk menuliskan 2 properti sekaligus, dengan value pertama yaitu [row-gap] dan value selanjutnya yaitu [column-gap].</p>
+            <p>Atau bisa juga ditulis 1 value pada properti gap, maka value tersebut akan berlaku untuk 2 value diatas.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gap">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="place-items" class="section">
+        <header class="ex-header">
+          <h2>place-items</h2>
+          <p>Mensejajarkan items pada sumbu vertikal dan horizontal.
+          </p>
+          <ul>
+            <li><p>justify-items = mensejajarkan items pada sumbu horizontal.</p></li>
+            <li><p>align-items = mensejajarkan items pada sumbu vertikal.</p></li>
+            <li><p>place-items = shorthand untuk menuliskan 2 properti tersebut.</p></li>
+          </ul>
+          <pre class="vs">
+            <code>.container {</code>
+            <code>   justify-items: start | end | center | stretch;</code>
+            <code>   align-items: start | end | center | stretch;</code>
+            <code>   place-items: [align-items] [justify-items]</code>
+            <code>}</code>
+          </pre>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-items: start</code>
+            </pre>
+            <p>Item berada pada awal baris (sumbu horizontal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji jis">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-items: center</code>
+            </pre>
+            <p>Item berada pada tengah baris (sumbu horizontal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji jic">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-items: end</code>
+            </pre>
+            <p>Item berada pada akhir baris (sumbu horizontal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji jie">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-items: stretch</code>
+            </pre>
+            <p>Item akan memenuhi baris secara horizontal (ini adalah nilai defaultnya).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji jist">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-items: start</code>
+            </pre>
+            <p>Item berada pada awal kolom (sumbu vertikal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji als">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-items: center</code>
+            </pre>
+            <p>Item berada pada tengah kolom (sumbu vertikal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji alc">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-items: end</code>
+            </pre>
+            <p>Item berada pada akhir kolom (sumbu vertikal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji alend">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-items: stretch</code>
+            </pre>
+            <p>Item akan memenuhi baris secara vertikal.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji alst">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>place-items: center end</code>
+            </pre>
+            <p>properti ini adalah shorthand untuk menuliskan 2 properti sekaligus yakni [align-items] & [justify-items].</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji pics">
+                <div class="vp-item p5">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="place-content" class="section">
+        <header class="ex-header">
+          <h2>place-content</h2>
+          <p>Mengatur posisi seluruh grid container pada
+            sumbu vertikal & horizontal.
+          </p>
+          <p>Ini bisa dilakukan ketika ukuran total grid
+            lebih kecil dari ukuran containernya, biasanya
+            ketika grid items nya menggunakan ukuran yang
+            fixed (px).</p>
+          <ul>
+            <li><p>align-content = mengatur seluruh grid container pada sumbu vertikal.</p></li>
+            <li><p>justify-content = mengatur seluruh grid container pada sumbu horizontal.</p></li>
+            <li><p>place-content = shorthand untuk menuliskan 2 properti tersebut.</p></li>
+          </ul>
+          <pre class="vs">
+            <code>.container {</code>
+            <code>   align-content: start | end | center | stretch | space-around | space-between | space-evenly;</code>
+            <code>   justify-content: start | end | center | stretch | space-around | space-between | space-evenly;</code>
+            <code>   place-content: [align-content] [justify-content]</code>
+            <code>}</code>
+          </pre>
+        </header>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-content: start</code>
+            </pre>
+            <p>grid berada pada awal kolom (sumbu vertikal). ini adalah nilai defaultnya.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc acs">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-content: center</code>
+            </pre>
+            <p>grid berada pada tengah kolom (sumbu vertikal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc acc">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-content: end</code>
+            </pre>
+            <p>grid berada pada akhir kolom (sumbu vertikal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc ace">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-content: space-around</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc acsa">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-content: space-between</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc acsb">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>align-content: space-evenly</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc acse">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-content: start</code>
+            </pre>
+            <p>grid berada pada awal baris (sumbu horizontal). ini adalah nilai defaultnya.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc jcs">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-content: center</code>
+            </pre>
+            <p>grid berada pada tengah baris (sumbu horizontal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc jcc">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-content: end</code>
+            </pre>
+            <p>grid berada pada akhir baris (sumbu horizontal).</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc jce">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-content: space-around</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc jcsa">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-content: space-between</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc jcsb">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>justify-content: space-evenly</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc jcse">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>place-content: end center</code>
+            </pre>
+            <p>properti ini adalah shorthand untuk menuliskan 2 properti sekaligus yakni [align-content] & [justify-content].</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example pc pci">
+                <div class="vp-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+                <div class="vp-item">8</div>
+                <div class="vp-item">9</div>
+                <div class="vp-item">10</div>
+                <div class="vp-item">11</div>
+                <div class="vp-item">12</div>
+                <div class="vp-item">13</div>
+                <div class="vp-item">14</div>
+                <div class="vp-item">15</div>
+                <div class="vp-item">16</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="self-properties" class="section">
+        <header class="ex-header">
+          <h2>self-item-properties</h2>
+          <p>Mengatur posisi item secara individu menggunakan [align-self] & [justify-self]
+          </p>
+          <ul>
+            <li><p>align-self = mengatur posisi item pada sebuah cell terhadap sumbu vertikal (baris).</p></li>
+            <li><p>justify-self = mengatur posisi item pada sebuah cell terhadap sumbu horizontal (column).</p></li>
+            <li><p>place-self = shorthand untuk menuliskan 2 properti tersebut.</p></li>
+          </ul>
+          <pre class="vs">
+            <code>.container {</code>
+            <code>   align-self: start | end | center | stretch;</code>
+            <code>   justify-self: start | end | center | stretch;</code>
+            <code>   place-self: [align-self] [justify-self]</code>
+            <code>}</code>
+          </pre>
+        </header>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>.item-1 { align-self: start }</code>
+                <code>.item-1 { align-self: center }</code>
+                <code>.item-1 { align-self: end }</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji">
+                <div class="vp-item p5 as-satu">1</div>
+                <div class="vp-item p5 as-dua">2</div>
+                <div class="vp-item p5 as-tiga">3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>.item-1 { justify-self: start }</code>
+                <code>.item-1 { justify-self: center }</code>
+                <code>.item-1 { justify-self: end }</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji">
+                <div class="vp-item p5 js-satu">1</div>
+                <div class="vp-item p5 js-dua">2</div>
+                <div class="vp-item p5 js-tiga">3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>.item-1 {</code>
+                <code>   align-self: center;</code>
+                <code>   justify-self: center;</code>
+                <code>}</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example ji">
+                <div class="vp-item p5 ps-satu">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="grid-item-properties" class="section">
+        <header class="ex-header">
+          <h2>Grid Item Properties</h2>
+          <p>Menentukan tempat dari grid item dengan mengacu
+            pada nomor atau nama grid line yang spesifik.
+          </p>
+          <ul>
+            <li><p>grid-column-start & grid-column-end</p></li>
+            <li><p>grid-row-start & grid-row-end</p></li>
+            <li><p>[nomor] = mengacu pada nomor sesuai grid default, dengan pojok kiri atas adalah awal nilai positif. dan pojok kanan bawah adalah awal nilai negatif.</p></li>
+            <li><p>span [nomor] = ditambah berapa [nomor]</p></li>
+          </ul>
+          <pre class="vs">
+            <code>.item {</code>
+            <code>   grid-row-start: [nomor] | span [nomor];</code>
+            <code>   grid-row-end: [nomor] | span [nomor];</code>
+            <code>   grid-column-start: [nomor] | span [nomor];</code>
+            <code>   grid-column-end: [nomor] | span [nomor];</code>
+            <code>}</code>
+          </pre>
+        </header>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-row-start: 2</code>
+                <code>grid-row-end: 3</code>
+                <code>grid-column-start: 2</code>
+                <code>grid-column-end: 3</code>
+            </pre>
+            <p>Diketahui bahwa garis awal dimulai dari garis pada baris ke 2, dan diakhiri di garis pada baris ke 3</p>
+            <p>Diketahui bahwa garis awal dimulai dari garis pada kolom ke 2, dan diakhiri di garis pada kolom ke 3</p>
+            <p>Sebenarnya, kita tidak perlu menuliskan grid-row/column-end pada keduanya, jika salah satunya sudah memiliki properti end.</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gipi">
+                <div class="vp-item gipi-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-row: 2</code>
+                <code>grid-column: 3 / 4</code>
+            </pre>
+            <p>grid-row = shorthand untuk menuliskan grid-row-start / grid-row-end</p>
+            <p>grid-column = shorthand untuk menuliskan grid-column-start / grid-column-end</p>
+            <p>Jika hanya menuliskan satu value, maka itu merepresentasikan grid-row/column-start</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example gipii">
+                <div class="vp-item gipii-item">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-column-start: 1</code>
+                <code>grid-column-end: 4</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example sp">
+                <div class="vp-item sp-satu">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-row-start: span 3</code>
+            </pre>
+            <p>value span sama halnya dengan "loncat berapa nomor"</p>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example sp">
+                <div class="vp-item sp-dua">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-row: 2 / 5</code>
+                <code>grid-column: 2 / 4</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example sp">
+                <div class="vp-item sp-tiga">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ex">
+          <div class="ex-section">   
+            <pre>
+                <code>grid-row: 2 / span 3</code>
+                <code>grid-column: span 2</code>
+            </pre>
+          </div>
+          <div class="ex-aside">
+            <div class="vp">
+              <div class="vp-example sp">
+                <div class="vp-item sp-empat">1</div>
+                <div class="vp-item">2</div>
+                <div class="vp-item">3</div>
+                <div class="vp-item">4</div>
+                <div class="vp-item">5</div>
+                <div class="vp-item">6</div>
+                <div class="vp-item">7</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </body>
+</html>
